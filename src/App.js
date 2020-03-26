@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import Container from "react-bootstrap/Container";
 
-function App() {
+import QuizPage from "./pages/QuizPage.js";
+import StatsPage from "./pages/StatsPage.js";
+import AboutPage from "./pages/AboutPage.js";
+import Header from "./components/Header.js";
+import Sidebar from "./components/Sidebar.js";
+
+export default function App() {
+  const [sidebarIsOpen, updateSidebarIsOpen] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Container>
+        <Header onClickMenuButton={() => updateSidebarIsOpen(true)} />
+        <Sidebar
+          onClickMask={() => updateSidebarIsOpen(false)}
+          sidebarIsOpen={sidebarIsOpen}
+          onClickLink={() => updateSidebarIsOpen(false)}
+        />
+        <Route exact path="/" component={QuizPage} />
+        <Route path="/stats" component={StatsPage} />
+        <Route path="/about" component={AboutPage} />
+      </Container>
+    </Router>
   );
 }
-
-export default App;
