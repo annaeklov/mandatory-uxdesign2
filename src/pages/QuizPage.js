@@ -25,11 +25,17 @@ export default function QuizPage() {
   }
 
   return (
-    <Row>
-    <Col>
-      <h1>QuizPage</h1>
-      <div>{show}</div>
+    <>
+     <Row className="titleRow">
+      <Col className="titleCol">
+        <h1>Quiz page</h1>
       </Col>
     </Row>
+    <Row className="pageRow">
+      <Col className="pageCol">
+        {show}
+      </Col>
+    </Row>
+    </>
   );
 }
