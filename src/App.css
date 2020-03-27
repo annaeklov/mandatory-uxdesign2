@@ -1,8 +1,7 @@
 .container {
   border: 2px solid black;
   position: relative;
-  height: auto;
-
+  height: 500px;
 }
 
 .Sidebar {

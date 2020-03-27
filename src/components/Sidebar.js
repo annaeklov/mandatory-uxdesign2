@@ -25,7 +25,7 @@ export default function Sidebar({ sidebarIsOpen, onClickMask, onClickLink }) {
           <ul className="Sidebar__menu">
             <li className="Sidebar__menu-item">
               <Link
-                to={"/QuizPage"}
+                to={"/"}
                 className="Sidebar__menu-link"
                 onClick={onClickLink}
               >
@@ -34,7 +34,7 @@ export default function Sidebar({ sidebarIsOpen, onClickMask, onClickLink }) {
             </li>
             <li className="Sidebar__menu-item">
               <Link
-                to={"/Stats"}
+                to={"/stats"}
                 className="Sidebar__menu-link"
                 onClick={onClickLink}
               >
@@ -43,7 +43,7 @@ export default function Sidebar({ sidebarIsOpen, onClickMask, onClickLink }) {
             </li>
             <li className="Sidebar__menu-item">
               <Link
-                to={"/About"}
+                to={"/about"}
                 className="Sidebar__menu-link"
                 onClick={onClickLink}
               >
