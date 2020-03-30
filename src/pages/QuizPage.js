@@ -12,6 +12,7 @@ export default function QuizPage() {
   if (!startButtonIsClicked) {
     show = (
       <Button
+        className="center"
         variant="outline-dark"
         onClick={() => {
           updateStartButtonIsClicked(true);
@@ -26,16 +27,14 @@ export default function QuizPage() {
 
   return (
     <>
-     <Row className="titleRow">
-      <Col className="titleCol">
-        <h1>Quiz page</h1>
-      </Col>
-    </Row>
-    <Row className="pageRow">
-      <Col className="pageCol">
-        {show}
-      </Col>
-    </Row>
+      <Row className="titleRow">
+        <Col className="titleCol text-center">
+          <h1>Quiz page</h1>
+        </Col>
+      </Row>
+      <Row className="pageRow">
+        <Col className="pageCol text-center">{show}</Col>
+      </Row>
     </>
   );
 }
