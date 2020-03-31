@@ -78,6 +78,8 @@ body{
 
 .Sidebar__menu-link:hover {
   background-color: rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+
 }
 
 .Sidebar__menu-link {

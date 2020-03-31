@@ -2,14 +2,18 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-export default function ModalPopup({ show, hide, exitQuiz }) {
- 
 
+export default function ModalPopup({
+  show,
+  playAgain,
+  exitQuiz,
+  result,
+  numberOfQuestions
+}) {
   return (
     <Modal
       show
-      onHide={hide}
-      animation={true}
+      onHide={playAgain}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       aria-modal="true"
@@ -17,15 +21,16 @@ export default function ModalPopup({ show, hide, exitQuiz }) {
       autoFocus
       backdrop="static"
     >
-      <Modal.Header>Modal</Modal.Header>
       <Modal.Body>
-        <p>text text text</p>
+        <p>
+          Your result is: {result}/{numberOfQuestions}
+        </p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="outline-dark" onClick={exitQuiz}>
           Exit quiz
         </Button>
-        <Button variant="outline-dark" onClick={hide}>
+        <Button variant="outline-dark" onClick={playAgain}>
           Play again
         </Button>
       </Modal.Footer>

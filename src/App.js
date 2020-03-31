@@ -10,8 +10,10 @@ import AboutPage from "./pages/AboutPage.js";
 import Header from "./components/Header.js";
 import Sidebar from "./components/Sidebar.js";
 
+
 export default function App() {
   const [sidebarIsOpen, updateSidebarIsOpen] = useState(false);
+
 
   return (
     <Router>

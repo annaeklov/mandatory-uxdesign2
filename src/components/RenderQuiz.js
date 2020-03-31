@@ -5,11 +5,13 @@ import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 
 import ModalPopup from "./ModalPopup.js";
+import { result$, updateResultInLocalStorage } from "./Store.js";
 
 export default function RenderQuiz({ exitQuiz }) {
   const [questionsArr, setQuestionsArr] = useState([]);
   const [selectedRadios, setSelectedRadios] = useState({});
   const [openModal, setOpenModal] = useState(false);
+  const [result, setResult] = useState(0);
 
   const entities = {
     "&#039;": "'",
@@ -22,23 +24,29 @@ export default function RenderQuiz({ exitQuiz }) {
     "&uuml;": "ü",
     "&aring;": "å",
     "&auml;": "ä",
-    "&ouml;": "ö"
+    "&ouml;": "ö", 
+    "&shy;": "-"
   };
 
   useEffect(() => {
+    newQuiz();
+  }, []);
+
+  function newQuiz() {
     axios
       .get(
-        "https://opentdb.com/api.php?amount=2&category=9&difficulty=medium&type=multiple"
+        "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=multiple"
       )
       .then(response => {
         let arr = quizData(response.data.results);
         setQuestionsArr(arr);
         console.log(arr);
       })
+
       .catch(error => {
         console.log(error);
       });
-  }, []);
+  }
 
   function quizData(arr) {
     return arr.map(x => {
@@ -86,6 +94,29 @@ export default function RenderQuiz({ exitQuiz }) {
     );
   });
 
+  function getResult() {
+    let countCorrect = 0;
+
+    for (let i = 0; i < questionsArr.length; i++) {
+      if (selectedRadios[i + 1] === questionsArr[i].correctAnswer)
+        countCorrect++;
+    }
+    setResult(countCorrect);
+
+    let newResult = { ...result$.value };
+    newResult.gamesPlayed++;
+    newResult.correctAnswers += countCorrect;
+    newResult.incorrectAnswers += questionsArr.length - countCorrect;
+    newResult.correctPercentage =
+      Math.round(
+        (newResult.correctAnswers /
+          (newResult.correctAnswers + newResult.incorrectAnswers)) *
+          100
+      ) + "%";
+
+    updateResultInLocalStorage(newResult);
+  }
+
   function handleChangeRadio(e) {
     setSelectedRadios({
       ...selectedRadios,
@@ -101,8 +132,10 @@ export default function RenderQuiz({ exitQuiz }) {
 
   function handleClose() {
     setOpenModal(false);
+    newQuiz();
   }
   function handleShow() {
+    getResult();
     setOpenModal(true);
   }
 
@@ -121,7 +154,13 @@ export default function RenderQuiz({ exitQuiz }) {
         </form>
       )}
       {openModal && (
-        <ModalPopup exitQuiz={exitQuiz} show={handleShow} hide={handleClose} />
+        <ModalPopup
+          exitQuiz={exitQuiz}
+          show={handleShow}
+          playAgain={handleClose}
+          result={result}
+          numberOfQuestions={questionsArr.length}
+        />
       )}
     </>
   );

@@ -2,32 +2,32 @@ import React, { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import {updateResultInLocalStorage } from "../components/Store.js";
+
 import RenderQuiz from "../components/RenderQuiz.js";
 
 export default function QuizPage() {
-  const [startButtonIsClicked, updateStartButtonIsClicked] = useState(false);
+  const [startButtonIsClicked, setStartButtonIsClicked] = useState(false);
 
   let show;
 
-  function exitQuiz(){
-    updateStartButtonIsClicked(false);
-    console.log("startOver")
+  function exitQuiz() {
+    setStartButtonIsClicked(false);
+    updateResultInLocalStorage(null);
+  }
+
+  function startQuiz() {
+    setStartButtonIsClicked(true);
   }
 
   if (!startButtonIsClicked) {
     show = (
-      <Button
-        className="center"
-        variant="outline-dark"
-        onClick={() => {
-          updateStartButtonIsClicked(true);
-        }}
-      >
+      <Button className="center" variant="outline-dark" onClick={startQuiz}>
         Start quiz
       </Button>
     );
   } else {
-    show = <RenderQuiz exitQuiz={exitQuiz}/>;
+    show = <RenderQuiz exitQuiz={exitQuiz} />;
   }
 
   return (
