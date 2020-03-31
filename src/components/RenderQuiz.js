@@ -4,25 +4,31 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 
-export default function RenderQuiz() {
+import ModalPopup from "./ModalPopup.js";
+
+export default function RenderQuiz({ exitQuiz }) {
   const [questionsArr, setQuestionsArr] = useState([]);
   const [selectedRadios, setSelectedRadios] = useState({});
+  const [openModal, setOpenModal] = useState(false);
 
   const entities = {
     "&#039;": "'",
     "&quot;": '"',
-    "&ldquo;": "“",
-    "&rdquo;": "”",
+    "&ldquo;": '"',
+    "&rdquo;": '"',
     "&ntilde;": "ñ",
     "&eacute;": "é",
     "&amp;": "&",
-    "&uuml;": "ü"
+    "&uuml;": "ü",
+    "&aring;": "å",
+    "&auml;": "ä",
+    "&ouml;": "ö"
   };
 
   useEffect(() => {
     axios
       .get(
-        "https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple"
+        "https://opentdb.com/api.php?amount=2&category=9&difficulty=medium&type=multiple"
       )
       .then(response => {
         let arr = quizData(response.data.results);
@@ -90,6 +96,14 @@ export default function RenderQuiz() {
   function onSubmit(e) {
     e.preventDefault();
     console.log(selectedRadios);
+    handleShow();
+  }
+
+  function handleClose() {
+    setOpenModal(false);
+  }
+  function handleShow() {
+    setOpenModal(true);
   }
 
   return (
@@ -106,23 +120,9 @@ export default function RenderQuiz() {
           </Button>
         </form>
       )}
+      {openModal && (
+        <ModalPopup exitQuiz={exitQuiz} show={handleShow} hide={handleClose} />
+      )}
     </>
   );
 }
-
-/* const [value, updateValue] = useState(null);
-    const items = [
-        "a", 
-        "b", 
-        "c", 
-        "d"
-    ]
-            {items.map((currentValue, idx) => (
-                <input 
-                checked= {value === currentValue}
-                    type="radio"
-                    name="radio"
-                    onChange={() => updateValue(currentValue)}
-                    />
-            ))}
-                <p>{value}</p> */

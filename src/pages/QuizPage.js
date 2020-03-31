@@ -9,6 +9,11 @@ export default function QuizPage() {
 
   let show;
 
+  function exitQuiz(){
+    updateStartButtonIsClicked(false);
+    console.log("startOver")
+  }
+
   if (!startButtonIsClicked) {
     show = (
       <Button
@@ -22,7 +27,7 @@ export default function QuizPage() {
       </Button>
     );
   } else {
-    show = <RenderQuiz />;
+    show = <RenderQuiz exitQuiz={exitQuiz}/>;
   }
 
   return (
