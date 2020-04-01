@@ -4,7 +4,7 @@ export default function AboutPage() {
   return (
 
     
-    <div>
+    <div tabIndex="1" role="textbox" aria-label="about this app">
       <h1>AboutPage</h1>
       <p>
         What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing

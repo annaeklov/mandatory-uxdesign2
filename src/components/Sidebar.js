@@ -20,7 +20,7 @@ export default function Sidebar({ sidebarIsOpen, onClickMask, onClickLink }) {
             ></button>
           </label>
         )}
-        <aside className={className}>
+        <aside className={className} aria-label="the sidebar with three links">
           <h1>Menu</h1>
           <ul className="Sidebar__menu">
             <li className="Sidebar__menu-item">

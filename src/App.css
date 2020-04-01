@@ -67,7 +67,7 @@ body{
   display: inline-block;
   text-decoration: none;
   color: black;
-  font-size: 30px;
+  font-size: 1.5em;
 }
 
 .Sidebar__menu-link:focus {
@@ -77,8 +77,9 @@ body{
 }
 
 .Sidebar__menu-link:hover {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.66);
   text-decoration: none;
+  color: white;
 
 }
 

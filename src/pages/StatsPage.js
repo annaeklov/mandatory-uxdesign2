@@ -11,7 +11,7 @@ export default function StatsPage() {
     gamesPlayed: 0,
     correctAnswers: 0,
     incorrectAnswers: 0,
-    correctPercentage: 0
+    correctPercentage: 0 + "%"
   });
 }
   return (
@@ -21,15 +21,15 @@ export default function StatsPage() {
 
         <Card>
           <Card.Body>
-            <Card.Title>Your stats</Card.Title>
-            <Card.Text>Games played: {result$.value.gamesPlayed}</Card.Text>
-            <Card.Text>
+            <Card.Title tabIndex="1">Your stats</Card.Title>
+            <Card.Text tabIndex="1">Games played: {result$.value.gamesPlayed}</Card.Text>
+            <Card.Text tabIndex="1">
               Correct answers: {result$.value.correctAnswers}
             </Card.Text>
-            <Card.Text>
+            <Card.Text tabIndex="1">
               Incorrect answers: {result$.value.incorrectAnswers}
             </Card.Text>
-            <Card.Text>
+            <Card.Text tabIndex="1">
               Correct answers in percentage: {result$.value.correctPercentage}
             </Card.Text>
           </Card.Body>

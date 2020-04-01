@@ -2,7 +2,6 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
-
 export default function ModalPopup({
   show,
   playAgain,
@@ -10,6 +9,16 @@ export default function ModalPopup({
   result,
   numberOfQuestions
 }) {
+  let title;
+
+  if (result >= 0 && result <= 3) {
+    title = "Naaah, you suck!";
+  } else if (result > 3 && result <= 7) {
+    title = "You're OK!";
+  } else if (result > 7 && result <= 10) {
+    title = "WOW, you're the best!";
+  } else title = "Your result";
+
   return (
     <Modal
       show
@@ -22,15 +31,16 @@ export default function ModalPopup({
       backdrop="static"
     >
       <Modal.Body>
+        <Modal.Title >{title}</Modal.Title>
         <p>
-          Your result is: {result}/{numberOfQuestions}
+          You had {result} correct answers of {numberOfQuestions} questions
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-dark" onClick={exitQuiz}>
+        <Button  variant="outline-dark" onClick={exitQuiz}>
           Exit quiz
         </Button>
-        <Button variant="outline-dark" onClick={playAgain}>
+        <Button   variant="outline-dark" onClick={playAgain}>
           Play again
         </Button>
       </Modal.Footer>

@@ -24,8 +24,9 @@ export default function RenderQuiz({ exitQuiz }) {
     "&uuml;": "ü",
     "&aring;": "å",
     "&auml;": "ä",
-    "&ouml;": "ö", 
-    "&shy;": "-"
+    "&ouml;": "ö",
+    "&shy;": "-", 
+    "&rsquo;": "'"
   };
 
   useEffect(() => {
@@ -34,9 +35,7 @@ export default function RenderQuiz({ exitQuiz }) {
 
   function newQuiz() {
     axios
-      .get(
-        "https://opentdb.com/api.php?amount=3&category=9&difficulty=easy&type=multiple"
-      )
+      .get("https://opentdb.com/api.php?amount=2&difficulty=easy&type=multiple")
       .then(response => {
         let arr = quizData(response.data.results);
         setQuestionsArr(arr);
@@ -66,9 +65,11 @@ export default function RenderQuiz({ exitQuiz }) {
 
     return (
       <Card border="dark" key={idx}>
-        <Card.Body>
+        <Card.Body autoFocus aria-labelledby="QuestionCard">
           <Card.Title>Q{number}:</Card.Title>
-          <Card.Text>{question}</Card.Text>
+          <Card.Text aria-labelledby="QuestionText" tabIndex="1">
+            {question}
+          </Card.Text>
 
           {quiz.answers.map((answer, index) => {
             answer = answer.replace(/&#?\w+;/g, match => entities[match]);
@@ -76,6 +77,7 @@ export default function RenderQuiz({ exitQuiz }) {
               <Card.Footer key={index}>
                 <label forhtml={answer}>
                   <input
+                    tabIndex="1"
                     type="radio"
                     id={answer}
                     value={answer}
@@ -146,9 +148,9 @@ export default function RenderQuiz({ exitQuiz }) {
           <span className="sr-only">Loading...</span>
         </Spinner>
       ) : (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} aria-labelledby="questions, radio buttons and submit button">
           {mappedArr} <br />
-          <Button type="submit" className="btnDone" variant="outline-dark">
+          <Button tabIndex="1" type="submit" className="btnDone" variant="outline-dark">
             Done
           </Button>
         </form>
