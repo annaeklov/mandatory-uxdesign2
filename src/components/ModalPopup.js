@@ -9,14 +9,17 @@ export default function ModalPopup({
   result,
   numberOfQuestions
 }) {
+  
   let title;
 
   if (result >= 0 && result <= 3) {
     title = "Naaah, you suck!";
   } else if (result > 3 && result <= 7) {
     title = "You're OK!";
-  } else if (result > 7 && result <= 10) {
+  } else if (result > 7 && result < 10) {
     title = "WOW, you're the best!";
+  } else if (result === 10) {
+    title = "Oh my, you know it all!";
   } else title = "Your result";
 
   return (
@@ -31,16 +34,16 @@ export default function ModalPopup({
       backdrop="static"
     >
       <Modal.Body>
-        <Modal.Title >{title}</Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
         <p>
           You had {result} correct answers of {numberOfQuestions} questions
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button  variant="outline-dark" onClick={exitQuiz}>
+        <Button variant="outline-dark" onClick={exitQuiz}>
           Exit quiz
         </Button>
-        <Button   variant="outline-dark" onClick={playAgain}>
+        <Button variant="outline-dark" onClick={playAgain}>
           Play again
         </Button>
       </Modal.Footer>

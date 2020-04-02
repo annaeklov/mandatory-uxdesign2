@@ -29,7 +29,7 @@ export default function Sidebar({ sidebarIsOpen, onClickMask, onClickLink }) {
                 className="Sidebar__menu-link"
                 onClick={onClickLink}
               >
-                Start quiz
+                Quiz
               </Link>
             </li>
             <li className="Sidebar__menu-item">

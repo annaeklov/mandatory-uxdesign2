@@ -35,7 +35,7 @@ export default function RenderQuiz({ exitQuiz }) {
 
   function newQuiz() {
     axios
-      .get("https://opentdb.com/api.php?amount=2&difficulty=easy&type=multiple")
+      .get("https://opentdb.com/api.php?amount=10")
       .then(response => {
         let arr = quizData(response.data.results);
         setQuestionsArr(arr);
@@ -105,18 +105,18 @@ export default function RenderQuiz({ exitQuiz }) {
     }
     setResult(countCorrect);
 
-    let newResult = { ...result$.value };
-    newResult.gamesPlayed++;
-    newResult.correctAnswers += countCorrect;
-    newResult.incorrectAnswers += questionsArr.length - countCorrect;
-    newResult.correctPercentage =
+    let statsResult = { ...result$.value };
+    statsResult.gamesPlayed++;
+    statsResult.correctAnswers += countCorrect;
+    statsResult.incorrectAnswers += questionsArr.length - countCorrect;
+    statsResult.correctPercentage =
       Math.round(
-        (newResult.correctAnswers /
-          (newResult.correctAnswers + newResult.incorrectAnswers)) *
+        (statsResult.correctAnswers /
+          (statsResult.correctAnswers + statsResult.incorrectAnswers)) *
           100
       ) + "%";
 
-    updateResultInLocalStorage(newResult);
+    updateResultInLocalStorage(statsResult);
   }
 
   function handleChangeRadio(e) {

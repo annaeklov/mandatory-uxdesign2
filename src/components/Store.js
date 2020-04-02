@@ -4,11 +4,11 @@ export const result$ = new BehaviorSubject(
   JSON.parse(localStorage.getItem("result"))
 );
 
-export function updateResultInLocalStorage(newResult) {
-  if (newResult) {
-    localStorage.setItem("result", JSON.stringify(newResult));
+export function updateResultInLocalStorage(statsResult) {
+  if (statsResult) {
+    localStorage.setItem("result", JSON.stringify(statsResult));
   } else {
     localStorage.removeItem("result");
   }
-  result$.next(newResult);
+  result$.next(statsResult);
 }
