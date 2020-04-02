@@ -9,7 +9,6 @@ export default function ModalPopup({
   result,
   numberOfQuestions
 }) {
-  
   let title;
 
   if (result >= 0 && result <= 3) {

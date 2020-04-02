@@ -1,8 +1,12 @@
 import { BehaviorSubject } from "rxjs";
 
+
+
 export const result$ = new BehaviorSubject(
   JSON.parse(localStorage.getItem("result"))
 );
+
+ 
 
 export function updateResultInLocalStorage(statsResult) {
   if (statsResult) {
@@ -12,3 +16,4 @@ export function updateResultInLocalStorage(statsResult) {
   }
   result$.next(statsResult);
 }
+

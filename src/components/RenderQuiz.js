@@ -3,7 +3,6 @@ import axios from "axios";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
-
 import ModalPopup from "./ModalPopup.js";
 import { result$, updateResultInLocalStorage } from "./Store.js";
 
@@ -25,7 +24,7 @@ export default function RenderQuiz({ exitQuiz }) {
     "&aring;": "å",
     "&auml;": "ä",
     "&ouml;": "ö",
-    "&shy;": "-", 
+    "&shy;": "-",
     "&rsquo;": "'"
   };
 
@@ -39,7 +38,6 @@ export default function RenderQuiz({ exitQuiz }) {
       .then(response => {
         let arr = quizData(response.data.results);
         setQuestionsArr(arr);
-        console.log(arr);
       })
 
       .catch(error => {
@@ -66,7 +64,9 @@ export default function RenderQuiz({ exitQuiz }) {
     return (
       <Card border="dark" key={idx}>
         <Card.Body autoFocus aria-labelledby="QuestionCard">
-          <Card.Title>Q{number}:</Card.Title>
+          <Card.Title aria-labelledby="QuestionTitle" tabIndex="1">
+            Question {number}:
+          </Card.Title>
           <Card.Text aria-labelledby="QuestionText" tabIndex="1">
             {question}
           </Card.Text>
@@ -74,7 +74,7 @@ export default function RenderQuiz({ exitQuiz }) {
           {quiz.answers.map((answer, index) => {
             answer = answer.replace(/&#?\w+;/g, match => entities[match]);
             return (
-              <Card.Footer key={index}>
+              <Card.Footer key={index} style={{ backgroundColor: "white" }}>
                 <label forhtml={answer}>
                   <input
                     tabIndex="1"
@@ -128,7 +128,6 @@ export default function RenderQuiz({ exitQuiz }) {
 
   function onSubmit(e) {
     e.preventDefault();
-    console.log(selectedRadios);
     handleShow();
   }
 
@@ -148,9 +147,17 @@ export default function RenderQuiz({ exitQuiz }) {
           <span className="sr-only">Loading...</span>
         </Spinner>
       ) : (
-        <form onSubmit={onSubmit} aria-labelledby="questions, radio buttons and submit button">
+        <form
+          onSubmit={onSubmit}
+          aria-labelledby="questions, radio buttons and submit button"
+        >
           {mappedArr} <br />
-          <Button tabIndex="1" type="submit" className="btnDone" variant="outline-dark">
+          <Button
+            tabIndex="1"
+            type="submit"
+            className="btnDone"
+            variant="outline-dark"
+          >
             Done
           </Button>
         </form>
@@ -158,7 +165,7 @@ export default function RenderQuiz({ exitQuiz }) {
       {openModal && (
         <ModalPopup
           exitQuiz={exitQuiz}
-          show={handleShow}
+          show={openModal}
           playAgain={handleClose}
           result={result}
           numberOfQuestions={questionsArr.length}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
@@ -35,9 +36,12 @@ export default function QuizPage() {
 
   return (
     <>
+      <Helmet>
+        <title>{showTitle} </title>
+      </Helmet>
       <Row className="titleRow">
         <Col className="titleCol text-center">
-          <h1>{showTitle}</h1>
+          <h1>{showTitle} </h1>
         </Col>
       </Row>
       <Row className="pageRow">

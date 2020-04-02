@@ -20,6 +20,10 @@ body{
   margin-right: 3px;
 }
 
+.fas{
+  margin-right: 1em;
+}
+
 .pageRow {
   margin-top: 10px;
   height: 80%;

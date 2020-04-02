@@ -1,10 +1,12 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 export default function AboutPage() {
   return (
-
-    
     <div tabIndex="1" role="textbox" aria-label="about this app">
+      <Helmet>
+        <title>About page</title>
+      </Helmet>
       <h1>AboutPage</h1>
       <p>
         What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing
@@ -15,7 +17,7 @@ export default function AboutPage() {
         remaining essentially unchanged. It was popularised in the 1960s with
         the release of Letraset sheets containing Lorem Ipsum passages, and more
         recently with desktop publishing software like Aldus PageMaker including
-        versions of Lorem Ipsum. 
+        versions of Lorem Ipsum.
         <br />
         <br />
         Why do we use it? It is a long established fact that a reader will be

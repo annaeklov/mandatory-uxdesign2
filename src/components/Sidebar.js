@@ -20,15 +20,23 @@ export default function Sidebar({ sidebarIsOpen, onClickMask, onClickLink }) {
             ></button>
           </label>
         )}
-        <aside className={className} aria-label="the sidebar with three links">
+        <aside
+          className={className}
+          aria-label="the sidebar with three links"
+          role="navigation"
+        >
           <h1>Menu</h1>
-          <ul className="Sidebar__menu">
+          <ul className="Sidebar__menu" role="navigation">
             <li className="Sidebar__menu-item">
               <Link
                 to={"/"}
                 className="Sidebar__menu-link"
                 onClick={onClickLink}
               >
+                <i
+                  className="fas fa-play-circle
+"
+                ></i>
                 Quiz
               </Link>
             </li>
@@ -38,6 +46,7 @@ export default function Sidebar({ sidebarIsOpen, onClickMask, onClickLink }) {
                 className="Sidebar__menu-link"
                 onClick={onClickLink}
               >
+                <i className="fas fa-chart-bar"></i>
                 Stats
               </Link>
             </li>
@@ -47,6 +56,7 @@ export default function Sidebar({ sidebarIsOpen, onClickMask, onClickLink }) {
                 className="Sidebar__menu-link"
                 onClick={onClickLink}
               >
+                <i className="fas fa-info-circle"></i>
                 About
               </Link>
             </li>
